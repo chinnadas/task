@@ -1,0 +1,2 @@
+pscp -i C:/Desktop/privatekey.ppk C:/Desktop/file.txt root@IP:/opt/tomcat/somefolder
+pscp -i  

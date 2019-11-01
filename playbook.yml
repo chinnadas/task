@@ -1,0 +1,45 @@
+---
+    - hosts: webserver
+      become: yes
+      become_method: sudo
+      tasks:
+              
+        - name: Build Docker image from Dockerfile
+          docker_image:
+            name: web
+            path: docker
+            state: build
+        
+        - name: Running the container
+          docker_container:
+            image: web:latest
+            path: docker
+            state: running
+
+          exposed_ports:
+          - 80
+          ports:
+          "80:80"
+            
+        - name: Check if container is running
+          shell: docker ps
+
+        - name: Build Docker image from Mysql
+          docker_image:
+            name: Mysql
+            path: docker
+            state: build
+        
+        - name: Running the container
+          docker_container:
+            image: Mysql:latest
+            path: docker
+            state: running
+        
+        exposed_ports:
+          - 1403
+          ports:
+          "1403:1403"
+
+
+
